@@ -43,7 +43,6 @@ targetCell.value = text
 
 targetCell.alignment = Alignment(horizontal='center', vertical='center')  
 
-sh1.append
 #print(text)
  #print(type(temp))
 
