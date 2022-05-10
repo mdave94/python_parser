@@ -1,5 +1,7 @@
+from cgi import test
 from json import load
 from re import X
+from traceback import print_tb
 from openpyxl import load_workbook
 from openpyxl.styles import Alignment
 
@@ -10,6 +12,7 @@ sheet  = book.active
 max_column = sheet.max_column
 max_row = sheet.max_row
 sheet_cells=[]
+
 
 """
 for row in sheet.iter_rows():
@@ -31,13 +34,29 @@ for row in sheet.iter_rows():
     row_cells = []
     for cell in row:
         row_cells.append(cell.value)
-        row_cells[0].upper()   
-        text = row_cells[0]+" ("+row_cells[1]+")\n"+row_cells[2]+","+str(row_cells[3])+"\n"+row_cells[5]+","+row_cells[4]
+        
+  #  print(row_cells)       
     sheet_cells.append(tuple(row_cells))
-    print(text)
+    text = row_cells[0]+" ("+row_cells[1]+")\n"+row_cells[2]+","+str(row_cells[3])+"\n"+row_cells[5]+","+row_cells[4]
+   # print(text )
+   # sheet.merge_cells(start_row=row_cells[0], start_column=1, end_row=row_cells[5], end_column=4)
+    
+    temp.append(text)
+  #  print(text+" ||\n")
 
+print(temp)
+    #sheet.append(text)
 
-
+for i in range(1,max_row+1):
+    row_cells = []
+    for j in range(1,max_column):
+        row_cells.append(cell.value)
+        sheet_cells.append(tuple(row_cells))
+    text = row_cells[0]+" ("+row_cells[1]+")\n"+row_cells[2]+","+str(row_cells[3])+"\n"+row_cells[5]+","+row_cells[4]
+    sheet.merge_cells(start_row=i, start_column=1, end_row=i, end_column=7)
+    targetCell = sheet.cell(row=i,column=i)
+    
+    #targetCell.value = text
 
 
 #sheet.merge_cells('A1:G1')  
@@ -74,5 +93,5 @@ targetCell.alignment = Alignment(horizontal='center', vertical='center')
  #   sh1.append(item)
 
 
-#book.save('silence_labels.xlsx')
+book.save('silence_labels.xlsx')
 print(" lefutott rendesen")
