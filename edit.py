@@ -7,6 +7,7 @@ from openpyxl.styles import Alignment
 
 
 
+
 book = load_workbook('silence_labels.xlsx')
 sheet  = book.active
 max_column = sheet.max_column
@@ -37,14 +38,18 @@ for idx, row in enumerate(sheet.iter_rows()):
         
    # print(row_cells)       
     sheet_cells.append(tuple(row_cells))
-    text = row_cells[0]+" ("+row_cells[1]+")\n"+row_cells[2]+","+str(row_cells[3])+"\n"+row_cells[5]+","+row_cells[4]
-   # print(text )cls
-    sheet.merge_cells(start_row=idx+1, start_column=1, end_row=idx+1, end_column=7)
+    text = row_cells[0].upper()+" ("+row_cells[1]+")\n"+row_cells[2]+","+str(row_cells[3])+"\n"+row_cells[5]+","+row_cells[4]
+    #sheet.merge_cells(start_row=idx+1, start_column=1, end_row=idx+1, end_column=7)
     targetCell = sheet.cell(row=idx+1,column=1)
+    sheet.row_dimensions[idx].height = float(43.75)
+    sheet.row_dimensions[idx].width = float(43.75)
     targetCell.value = text
+    targetCell.alignment = Alignment(horizontal='center', vertical='center') 
     #temp.append(text)
-    print(targetCell)
+    print(targetCell.value)
   #  print(text+" ||\n")
+
+
 
 #print(temp)
     #sheet.append(text)
